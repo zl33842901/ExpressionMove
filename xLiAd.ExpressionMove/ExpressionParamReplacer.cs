@@ -47,6 +47,8 @@ namespace xLiAd.ExpressionMove
                 if(moverTypeMapper != null)
                 {
                     toMember = moverTypeMapper.GetMember(node.Member.Name);
+                    if (toMember == null)
+                        throw new Exception($"未找到对应的字段{{{node.Member.Name}}}");
                 }
                 else
                 {

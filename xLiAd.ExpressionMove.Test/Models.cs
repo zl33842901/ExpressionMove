@@ -9,6 +9,8 @@ namespace xLiAd.ExpressionMove.Test
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime CreateTime { get; set; }
+        public string[] Values { get; set; }
+        public int[] IntValues { get; set; }
     }
     public class Model2
     {
