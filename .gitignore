@@ -3,3 +3,8 @@
 ################################################################################
 
 /.vs/xLiAd.ExpressionMove/v16
+/xLiAd.ExpressionMove/bin/Debug/netstandard2.0
+/xLiAd.ExpressionMove/obj
+/xLiAd.ExpressionMove.Test/obj
+/xLiAd.ExpressionMove.Test/bin/Debug/netcoreapp3.0
+/.vs/xLiAd.ExpressionMove/DesignTimeBuild
