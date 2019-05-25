@@ -23,7 +23,11 @@ namespace xLiAd.ExpressionMove
             var mover = new ExpressionMover<T, Tk>(expression);
             return mover;
         }
-
+        /// <summary>
+        /// 从一个字段表达式里找到MemberInfo 反射
+        /// </summary>
+        /// <param name="lambdaExpression"></param>
+        /// <returns></returns>
         public static MemberInfo GetMember(this LambdaExpression lambdaExpression)
         {
             var fd = new ExpressionMemberInfoFinder(lambdaExpression);

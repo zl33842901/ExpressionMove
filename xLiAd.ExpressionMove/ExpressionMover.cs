@@ -19,6 +19,11 @@ namespace xLiAd.ExpressionMove
 
         private ConcurrentDictionary<Type, IMoverTypeMapper> moverTypeMappers = new ConcurrentDictionary<Type, IMoverTypeMapper>();
 
+        internal void SetMapper(IMoverTypeMapper typeMapper)
+        {
+            moverTypeMappers[typeMapper.TargetType] = typeMapper;
+        }
+
         /// <summary>
         /// 替换表达式参数为目标类
         /// </summary>
@@ -41,20 +46,8 @@ namespace xLiAd.ExpressionMove
             }
             else
             {
-                if (createWhenNoExists)
-                {
-                    mapper = new MoverTypeMapper<T, TTarget>();
-                    moverTypeMappers[typeof(TTarget)] = mapper;
-                    return mapper;
-                }
-                else
-                    return null;
+                return null;
             }
-        }
-
-        public MoverTypeMapper<T, TTarget> TypeMapper<TTarget>()
-        {
-            return GetMapper<TTarget>(true);
         }
     }
 }
