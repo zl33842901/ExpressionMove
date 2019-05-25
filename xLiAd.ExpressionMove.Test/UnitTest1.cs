@@ -6,6 +6,9 @@ using Xunit;
 
 namespace xLiAd.ExpressionMove.Test
 {
+    /// <summary>
+    /// 当字段完全一样时，不必使用 MoverTypeConfiguration
+    /// </summary>
     public class UnitTest1
     {
         private List<Model2> L2 = new List<Model2>() { new Model2() { CreateTime = DateTime.Now.AddSeconds(-1), Id = 5, Name = "a" } };

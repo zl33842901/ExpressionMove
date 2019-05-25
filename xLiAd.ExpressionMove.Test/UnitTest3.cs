@@ -7,11 +7,14 @@ using System.Linq;
 
 namespace xLiAd.ExpressionMove.Test
 {
+    /// <summary>
+    /// 当你的领域对象和你的数据对象不一致时
+    /// </summary>
     public class UnitTest3
     {
         private List<Model4> L4 = new List<Model4>()
         {
-            new Model4(){ id = 3, intvalues = ",1,2,3," , values = ",a,b,c," },
+            new Model4(){ id = 3, intvalues = ",1,2,3," , values = ",a,b,c," },//在数据库里要这样存。
             new Model4(){ id = 5, intvalues = ",5,6,7," , values = ",a,b,c,"}
         };
         private MoverTypeConfiguration Configuration { get; } = new MoverTypeConfiguration(x =>

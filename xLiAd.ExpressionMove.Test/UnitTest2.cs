@@ -7,6 +7,9 @@ using Xunit;
 
 namespace xLiAd.ExpressionMove.Test
 {
+    /// <summary>
+    /// 当有字段名不一致时
+    /// </summary>
     public class UnitTest2
     {
         private List<Model2> L2 = new List<Model2>() { new Model2() { CreateTime = DateTime.Now.AddSeconds(-1), Id = 5, Name = "a" } };
