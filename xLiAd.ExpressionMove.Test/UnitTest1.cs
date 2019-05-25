@@ -11,8 +11,8 @@ namespace xLiAd.ExpressionMove.Test
         private List<Model2> L2 = new List<Model2>() { new Model2() { CreateTime = DateTime.Now.AddSeconds(-1), Id = 5, Name = "a" } };
         private List<Model3> L3 = new List<Model3>()
         {
-            new Model3(){ DateTime = DateTime.Today, id = 5, MyName = "a"},
-            new Model3(){ DateTime = DateTime.Today, id = 6, MyName = "a"}
+            new Model3(){ CreateTime = DateTime.Today, id = 5, MyName = "a"},
+            new Model3(){ CreateTime = DateTime.Today, id = 6, MyName = "a"}
         };
         [Fact]
         public void Test1()

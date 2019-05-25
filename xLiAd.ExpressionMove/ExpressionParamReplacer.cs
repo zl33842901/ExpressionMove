@@ -43,24 +43,55 @@ namespace xLiAd.ExpressionMove
         {
             if (node.Expression != null && node.Expression.Type == typeof(TFrom))
             {
-                MemberInfo toMember;
-                if(moverTypeMapper != null)
-                {
-                    toMember = moverTypeMapper.GetMember(node.Member.Name);
-                    if (toMember == null)
-                        throw new Exception($"未找到对应的字段{{{node.Member.Name}}}");
-                }
-                else
-                {
-                    MemberInfoReplacer memberInfoReplacer = new MemberInfoReplacer(node.Member);
-                    toMember = memberInfoReplacer.GetMember(typeof(TTo));
-                }
+                MemberInfo toMember = getMember(node.Member);
                 return Expression.MakeMemberAccess(par, toMember);
             }
             else
                 return base.VisitMember(node);
         }
+        /// <summary>
+        /// 根据原属性 获得新属性
+        /// </summary>
+        /// <param name="tmi"></param>
+        /// <returns></returns>
+        private MemberInfo getMember(MemberInfo tmi)
+        {
+            MemberInfo toMember = null;
+            if (moverTypeMapper != null)
+            {
+                toMember = moverTypeMapper.GetMember(tmi.Name);
+            }
+            if (toMember == null)
+            {
+                MemberInfoReplacer memberInfoReplacer = new MemberInfoReplacer(tmi);
+                toMember = memberInfoReplacer.GetMember(typeof(TTo));
+            }
+            if (toMember == null)
+                throw new Exception($"未找到对应的字段{{{tmi.Name}}}");
+            return toMember;
+        }
 
-
+        protected override Expression VisitMethodCall(MethodCallExpression node)
+        {
+            if(node.Arguments.Count == 2 && node.Arguments[0] is MemberExpression me && node.Arguments[1] is ConstantExpression constant)
+            {
+                if(me.Expression != null && me.Expression.Type == typeof(TFrom))
+                {
+                    MemberInfo nmi = getMember(me.Member);
+                    if(((System.Reflection.PropertyInfo)nmi).PropertyType != ((System.Reflection.PropertyInfo)me.Member).PropertyType)//字段类型不一致。
+                    {
+                        if(node.Method.Name == "Contains" && ((System.Reflection.PropertyInfo)nmi).PropertyType == typeof(string))
+                        {
+                            //这块硬处理一下。
+                            var c = Expression.Constant("," + constant.Value.ToString() + ",", typeof(string));
+                            var mmi = typeof(string).GetMethod("Contains", BindingFlags.Instance | BindingFlags.Public, Type.DefaultBinder, new Type[] { typeof(string) }, new ParameterModifier[] { new ParameterModifier(1) });
+                            var method = Expression.Call(Expression.MakeMemberAccess(par, nmi), mmi, c);
+                            return method;
+                        }
+                    }
+                }
+            }
+            return base.VisitMethodCall(node);
+        }
     }
 }
