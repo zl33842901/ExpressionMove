@@ -27,5 +27,16 @@ namespace xLiAd.ExpressionMove.Test
             var l = L2.Where(result.Compile()).ToList();
             Assert.NotEmpty(l);
         }
+
+        [Fact]
+        public void Test2()
+        {
+            var model1 = new Model1() { CreateTime = DateTime.Now, Id = 5, Name = "2" };
+            Expression<Func<Model1, bool>> exp = x => x.Id == model1.Id;
+            Expression<Func<Model2, bool>> result = exp.BuildMover().MoveTo<Model2>();
+            Assert.NotNull(result);
+            var l = L2.Where(result.Compile()).ToList();
+            Assert.NotEmpty(l);
+        }
     }
 }

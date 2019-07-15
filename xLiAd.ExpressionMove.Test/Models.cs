@@ -30,4 +30,10 @@ namespace xLiAd.ExpressionMove.Test
         public string values { get; set; }//",a,b,c,"
         public string intvalues { get; set; }//",1,2,3,"
     }
+    public class Model5
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public DateTime CreateTime { get; set; }
+    }
 }

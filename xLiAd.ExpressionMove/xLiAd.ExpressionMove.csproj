@@ -7,6 +7,7 @@
     <Description>表达式参数转换插件，用于领域模型和数据模型之间查询条件和排序条件的转换。</Description>
     <Copyright>Copyright © zhanglei 2019</Copyright>
     <PackageProjectUrl>https://github.com/zl33842901/ExpressionMove</PackageProjectUrl>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
 </Project>

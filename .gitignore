@@ -8,3 +8,6 @@
 /xLiAd.ExpressionMove.Test/obj
 /xLiAd.ExpressionMove.Test/bin/Debug/netcoreapp3.0
 /.vs/xLiAd.ExpressionMove/DesignTimeBuild
+/xLiAd.ExpressionMove/bin/Release/netstandard2.0
+/xLiAd.ExpressionMove/nupkgs
+/xLiAd.ExpressionMove/nupkgsSymb

@@ -14,13 +14,13 @@ namespace xLiAd.ExpressionMove
     /// <typeparam name="TKey"></typeparam>
     internal class ExpressionParamReplacer<TFrom, TTo, TKey> : ExpressionVisitor
     {
-        private readonly Expression<Func<TFrom, TKey>> expression;
+        private readonly LambdaExpression expression;
         private readonly MoverTypeMapper<TFrom, TTo> moverTypeMapper;
         private Expression<Func<TTo, TKey>> result;
         private ParameterExpression par;
         internal ExpressionParamReplacer(Expression<Func<TFrom, TKey>> expression, MoverTypeMapper<TFrom, TTo> moverTypeMapper)
         {
-            this.expression = expression;
+            this.expression = TrimExpression.Trim(expression) as LambdaExpression;
             this.moverTypeMapper = moverTypeMapper;
         }
 
