@@ -84,9 +84,9 @@ namespace xLiAd.ExpressionMove
                     }
                     break;
 
-                case ExpressionType.Not:
-                    var n = (UnaryExpression)expression;
-                    return Expression.Equal(n.Operand, Expression.Constant(false));
+                //case ExpressionType.Not:
+                //    var n = (UnaryExpression)expression;
+                //    return Expression.Equal(n.Operand, Expression.Constant(false));
                 case ExpressionType.AndAlso:
                 case ExpressionType.OrElse:
                     var b = (BinaryExpression)expression;
