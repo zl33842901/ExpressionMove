@@ -35,5 +35,14 @@ namespace xLiAd.ExpressionMove.Test
             var l = L4.Where(result.Compile()).ToList();
             Assert.NotEmpty(l);
         }
+
+        [Fact]
+        public void Test2()
+        {
+            Expression<Func<Model1, object>> expression = x => x.IntValues;
+            var provider = Configuration.Build();
+            var result = provider.Load(expression).MoveTo<Model4>();
+            Assert.NotNull(result);
+        }
     }
 }

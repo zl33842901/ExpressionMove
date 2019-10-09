@@ -30,7 +30,9 @@ namespace xLiAd.ExpressionMove
             {
                 par = Expression.Parameter(typeof(TTo), expression.Parameters[0].Name);
                 var exp = Visit(expression.Body);
-                result = Expression.Lambda(exp, par) as Expression<Func<TTo, TKey>>;
+                var lambda = Expression.Lambda<Func<TTo, TKey>>(exp, par);
+                
+                result = lambda;
             }
             return result;
         }
