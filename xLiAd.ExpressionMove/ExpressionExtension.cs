@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace xLiAd.ExpressionMove
 {
-    internal static class ExpressionExtension
+    public static class ExpressionExtension
     {
         private static readonly ConcurrentDictionary<string, Func<object, object[], object>> Cache = new ConcurrentDictionary<string, Func<object, object[], object>>();
 
@@ -136,5 +137,67 @@ namespace xLiAd.ExpressionMove
             var compileExpression = Expression.Lambda<Func<object, object[], object>>(convertExpression, parameter, parameters);
             return compileExpression.Compile();
         }
+        /// <summary>
+        /// 根据字段名找到对应可能的字段名
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static string[] GetMayBeName(string s)
+        {
+            List<string> result = new List<string>();
+            result.Add(s);
+            if (s.Length < 2)
+                return result.ToArray();
+            bool camel = s.Contains("_");
+            bool anyUpper = Regex.IsMatch(s.Substring(1), "[A-Z]+");
+            if (camel)
+            {
+                var ss = s.Substring(1);
+                foreach (var n in names)
+                    ss = ss.Replace(n.Value, n.Key);
+                ss = s.Substring(0, 1).ToUpper() + ss;
+                if (ss != s)
+                    result.Add(ss);
+            }
+            else if (anyUpper)
+            {
+                var ss = s.Substring(1);
+                foreach (var n in names)
+                    ss = ss.Replace(n.Key, n.Value);
+                ss = s.Substring(0, 1).ToLower() + ss;
+                if (ss != s)
+                    result.Add(ss);
+            }
+            return result.ToArray();
+        }
+        private static Dictionary<string, string> names = new Dictionary<string, string>()
+        {
+            { "A", "_a" },
+            { "B", "_b" },
+            { "C", "_c" },
+            { "D", "_d" },
+            { "E", "_e" },
+            { "F", "_f" },
+            { "G", "_g" },
+            { "H", "_h" },
+            { "I", "_i" },
+            { "J", "_j" },
+            { "K", "_k" },
+            { "L", "_l" },
+            { "M", "_m" },
+            { "N", "_n" },
+            { "O", "_o" },
+            { "P", "_p" },
+            { "Q", "_q" },
+            { "R", "_r" },
+            { "S", "_s" },
+            { "T", "_t" },
+            { "U", "_u" },
+            { "V", "_v" },
+            { "W", "_w" },
+            { "X", "_x" },
+            { "Y", "_y" },
+            { "Z", "_z" }
+        };
     }
 }

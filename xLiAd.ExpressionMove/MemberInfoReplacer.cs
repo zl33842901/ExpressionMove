@@ -18,13 +18,18 @@ namespace xLiAd.ExpressionMove
 
         internal MemberInfo GetMember(Type type)
         {
-            var m = type.GetMember(memberInfo.Name, BindingFlags.Public | BindingFlags.Instance);
-            if (m.Length < 1)
-                throw new Exception($"未找到对应的字段！{{{memberInfo.Name}}}");
-            else if (m.Length > 1)
-                throw new Exception($"找到了多个字段！{{{memberInfo.Name}}}");
-            else
-                return m[0];
+            var names = ExpressionExtension.GetMayBeName(memberInfo.Name);
+            foreach(var name in names)
+            {
+                var m = type.GetMember(name, BindingFlags.Public | BindingFlags.Instance);
+                if (m.Length < 1)
+                    continue;
+                else if (m.Length > 1)
+                    throw new Exception($"找到了多个字段！{{{name}}}");
+                else
+                    return m[0];
+            }
+            throw new Exception($"未找到对应的字段！{{{memberInfo.Name}}}");
         }
     }
 }

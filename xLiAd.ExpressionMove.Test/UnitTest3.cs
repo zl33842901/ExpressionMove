@@ -44,5 +44,37 @@ namespace xLiAd.ExpressionMove.Test
             var result = provider.Load(expression).MoveTo<Model4>();
             Assert.NotNull(result);
         }
+
+        [Fact]
+        public void Test3()
+        {
+            Expression<Func<Model5, object>> expression = x => x.CreateTime;
+            var provider = Configuration.Build();
+            var result = provider.Load(expression).MoveTo<Model6>();
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public void Test4()
+        {
+            Expression<Func<Model6, object>> expression = x => x.create_time;
+            var provider = Configuration.Build();
+            var result = provider.Load(expression).MoveTo<Model5>();
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public void Test5()
+        {
+            var s = "CreateTime";
+            var ss = ExpressionExtension.GetMayBeName(s);
+        }
+
+        [Fact]
+        public void Test6()
+        {
+            var s = "create_time";
+            var ss = ExpressionExtension.GetMayBeName(s);
+        }
     }
 }

@@ -36,4 +36,11 @@ namespace xLiAd.ExpressionMove.Test
         public string Name { get; set; }
         public DateTime CreateTime { get; set; }
     }
+
+    public class Model6
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public DateTime create_time { get; set; }
+    }
 }
